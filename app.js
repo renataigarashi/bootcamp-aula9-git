@@ -1,10 +1,11 @@
+// Imports
 import express from 'express';
 import mongoose from 'mongoose';
 
 import { studentRouter } from './routes/studentRouter.js';
 
 
-// conexao ao MongoDB pelo Mangoose
+// conexao ao MongoDB via Mangoose
 (async () => {
   try {
     await mongoose.connect(
