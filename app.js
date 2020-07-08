@@ -3,13 +3,17 @@ import express from 'express';
 import mongoose from 'mongoose';
 
 import { studentRouter } from './routes/studentRouter.js';
+import dotenv from 'dotenv';
 
+const app = express();
 
-// conexao ao MongoDB via Mangoose
+dotenv.config();
+
+// conexao ao MongoDB viaMangoose
 (async () => {
   try {
     await mongoose.connect(
-      'mongodb+srv://admin:root123@bootcamp.ri70b.mongodb.net/grades?retryWrites=true&w=majority',
+      `mongodb+srv://${process.env.USERDB}:${process.env.PWDDB}@bootcamp.ri70b.mongodb.net/grades?retryWrites=true&w=majority`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -19,13 +23,11 @@ import { studentRouter } from './routes/studentRouter.js';
   }
 })();
 
-const app = express();
-
 
 // definir o tipo de informação que vai trafegar na API
 app.use(express.json());
 app.use(studentRouter);
 
 //qual porta a aplicacao vai ta escutando
-app.listen(3000, () => console.log('API Iniciada'));
+app.listen(process.env.PORT, () => console.log('API Iniciada'));
 
