@@ -52,16 +52,6 @@ app.patch('/student/:id', async (req, res) => {
   }
 });
 
-app.put('/students/:id', async (req, res) => {
-  try {
-    const student = await studentModel.findOneAndUpdate(
-      //passei o que eu vou buscar, o que vou atualizar e quero que traga o novo para retornar para o cliente
-      { _id: req.params.id }, req.body, { new: true });
-    res.status(200).send(student);
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
 
 
 
